@@ -1,8 +1,7 @@
 const getMovie = (title: string) => {
-  return fetch(`http://www.omdbapi.com/?t=${title}`)
+  return fetch(`http://www.omdbapi.com/?t=${title}&apikey=26fc991f`)
           .then((result: Response) => result.json())
-          .then((data: any) => console.log(data))
-          .catch((error: any) => console.error(error));
+          .catch((error: Error) => console.error(error));
 }
 
 const SearchServices = {
