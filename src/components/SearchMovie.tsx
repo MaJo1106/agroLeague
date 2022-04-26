@@ -30,6 +30,7 @@ const SearchMovie: React.FC = () => {
     }));
   }
 
+  // TODO: Chercher une meilleure façon pour la gestion des nulls
   const handleSelectMovie = () => {
     if (movie) {
       dispatch(selectMovie(movie))
