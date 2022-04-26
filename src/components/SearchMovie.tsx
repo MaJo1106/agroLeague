@@ -39,25 +39,29 @@ const SearchMovie: React.FC = () => {
 
   console.log(searchValue, movie);
   return (
-    <div className='search-container'>
-      <input name='searchValue' value={searchValue} type='text' onChange={handleChangeValue} />
-      <button onClick={handleSearchMovie}> Search </button>
-      {movie && (
-        <>
-          {movie.poster && (
-            <div className='poster-container'>
-              <img src={movie.poster} alt='movie-poster' />
+    <>
+      <div className='search-container'>
+        <input name='searchValue' value={searchValue} type='text' onChange={handleChangeValue} />
+        <button onClick={handleSearchMovie}> Search </button>
+      </div>
+      <div className='result-container'>
+        {movie && (
+          <>
+            {movie.poster && (
+              <div className='poster-container'>
+                <img src={movie.poster} alt='movie-poster' />
+              </div>
+            )}
+            <div className='movie-information' onClick={handleSelectMovie}>
+              <div className='movie-title'>{movie.title}</div>
+              <div className='movie-genre'>{movie.genre}</div>
+              <div className='movie-duration'>{movie.duration}</div>
+              <div className='movie-year'>{movie.year}</div>
             </div>
-          )}
-          <div className='movie-information' onClick={handleSelectMovie}>
-            <div className='movie-title'>{movie.title}</div>
-            <div className='movie-genre'>{movie.genre}</div>
-            <div className='movie-duration'>{movie.duration}</div>
-            <div className='movie-year'>{movie.year}</div>
-          </div>
-        </>
-      )}
-    </div>
+          </>
+        )}
+      </div>
+    </>
   );
 };
 
