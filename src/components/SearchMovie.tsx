@@ -1,21 +1,15 @@
 import React, { ChangeEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SearchServices from '../services/SearchServices';
+import { Movie, selectMovie } from '../store/store';
+import { useDispatch } from 'react-redux';
+import './SearchMovie.css'
 
-interface Movie {
-  title: string,
-  year: string,
-  actors: string[],
-  director: string,
-  duration: string,
-  genre: string,
-  language: string,
-  poster?: string,
-  description: string,
-  country: string,
-}
 const SearchMovie: React.FC = () => {
   const [movie, setMovie] = useState<Movie | null>(null);
   const [searchValue, setSearchValue] = useState<string>('');
+  const history = useNavigate();
+  const dispatch = useDispatch();
   
   const handleChangeValue = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value)
@@ -36,9 +30,16 @@ const SearchMovie: React.FC = () => {
     }));
   }
 
+  const handleSelectMovie = () => {
+    if (movie) {
+      dispatch(selectMovie(movie))
+      history(`/movie/${movie?.title}`)
+    }
+  }
+
   console.log(searchValue, movie);
   return (
-    <div>
+    <div className='search-container'>
       <input name='searchValue' value={searchValue} type='text' onChange={handleChangeValue} />
       <button onClick={handleSearchMovie}> Search </button>
       {movie && (
@@ -48,7 +49,7 @@ const SearchMovie: React.FC = () => {
               <img src={movie.poster} alt='movie-poster' />
             </div>
           )}
-          <div className='movie-information'>
+          <div className='movie-information' onClick={handleSelectMovie}>
             <div className='movie-title'>{movie.title}</div>
             <div className='movie-genre'>{movie.genre}</div>
             <div className='movie-duration'>{movie.duration}</div>
