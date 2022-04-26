@@ -7,8 +7,6 @@ import './Movie.css';
 const Movie: React.FC = () => {
   const movie = useSelector(selectorMovie);
 
-  console.log('movie', movie);
-
   return (
     <div className='information-movie-container'>
       <div className='poster-container'>

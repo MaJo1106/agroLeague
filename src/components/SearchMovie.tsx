@@ -38,7 +38,6 @@ const SearchMovie: React.FC = () => {
     }
   }
 
-  console.log(searchValue, movie);
   return (
     <>
       <div className='search-container'>
